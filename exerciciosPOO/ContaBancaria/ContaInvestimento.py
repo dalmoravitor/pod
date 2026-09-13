@@ -11,11 +11,22 @@ class ContaInvestimento(ContaBancaria):
     def __init__(self, numero_conta, nome_titular, saldo=0, perfil_investidor="conservador"):
         super().__init__(numero_conta, nome_titular, saldo)
         self.perfil_investidor = perfil_investidor
-        self.perfil_investimento()
+        self.taxa_juros = 0.01 if perfil_investidor == "conservador" else 0.05
         
     #metodos de investimento
+    
+
+    @property
     def perfil_investimento(self):
-        if self.perfil_investidor == "conservador":
-            self.taxa_juros = 0.01
+        return self.perfil_investidor
+
+    @perfil_investimento.setter
+    def perfil_investimento(self, perfil_investidor):
+        if perfil_investidor not in ["conservador", "arriscado"]:
+            print("Perfil de investidor inválido. Escolha entre 'conservador' ou 'arriscado'.")
         else:
-            self.taxa_juros = 0.05
+            self.perfil_investidor = perfil_investidor
+            if perfil_investidor == "conservador":
+                self.taxa_juros = 0.01  # 1% ao mês
+            else:
+                self.taxa_juros = 0.05  # 5% ao mês

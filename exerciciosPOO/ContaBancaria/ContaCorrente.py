@@ -1,4 +1,5 @@
 from ContaBancaria import ContaBancaria
+from Erros import ErroQuantidade
 
 class ContaCorrente(ContaBancaria):
     def __init__(self, limite_saque, numero_conta, nome_titular, saldo=0 ):
